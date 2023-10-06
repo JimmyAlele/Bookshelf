@@ -17,3 +17,6 @@ term, as described in [Using the API](https://developers.google.com/books/docs/v
 - Use of Retrofit to make REST requests to the web server
 
 ## Pictures of the final app
+<img src = "https://github.com/JimmyAlele/Bookshelf/blob/master/app/src/main/res/drawable/kotlin_screenshot.png" width = "30%">
+<img src = "https://github.com/JimmyAlele/Bookshelf/blob/master/app/src/main/res/drawable/cat_screenshot.png" width = "30%">
+<img src = "https://github.com/JimmyAlele/Bookshelf/assets/135094151/71432bf6-a5b4-49b6-89c0-ae5e9ff0999c" width = "30%">
