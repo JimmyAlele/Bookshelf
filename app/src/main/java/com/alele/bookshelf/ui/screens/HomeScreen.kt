@@ -43,8 +43,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.alele.bookshelf.R
-import com.alele.bookshelf.model.AllData
-import com.alele.bookshelf.model.Book
 import com.alele.bookshelf.ui.theme.BookshelfTheme
 
 @Composable
@@ -53,8 +51,8 @@ fun HomeScreen(
 ) {
     when (bookshelfUiState) {
         is BookshelfUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
-        //is BookshelfUiState.Success -> BookGridScreen(bookshelfUiState.books, modifier)
-        is BookshelfUiState.Success -> ResultScreen(bookshelfUiState.books, modifier)
+        is BookshelfUiState.Success -> BookGridScreen(bookshelfUiState.books, modifier)
+//        is BookshelfUiState.Success -> ResultScreen(bookshelfUiState.books, modifier)
         is BookshelfUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
     }
 }
@@ -95,23 +93,23 @@ fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
  * ResultScreen displaying number of photos retrieved.
  */
 @Composable
-fun ResultScreen(data: AllData, modifier: Modifier = Modifier) {
+fun ResultScreen(data: MutableList<String>, modifier: Modifier = Modifier) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
     ) {
-        Text(text = data.items.toString())
+        Text(text = data.toString())
     }
 }
 @Composable
-fun BookCard(book: Book, modifier: Modifier = Modifier) {
+fun BookCard(book: String, modifier: Modifier = Modifier) {
     Card (
-            modifier = modifier,
+        modifier = modifier,
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ){
         AsyncImage(
             model = ImageRequest.Builder(context = LocalContext.current)
-                .data(book.imgSrc)
+                .data(book)
                 .crossfade(true)
                 .build(),
             contentDescription = null,
@@ -125,7 +123,7 @@ fun BookCard(book: Book, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun BookGridScreen(books: List<Book>, modifier: Modifier = Modifier) {
+fun BookGridScreen(books: MutableList<String>, modifier: Modifier = Modifier) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(150.dp),
         modifier = modifier.fillMaxWidth(),
@@ -158,11 +156,11 @@ fun ErrorScreenPreview() {
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun BookGridScreenPreview() {
     BookshelfTheme {
         val mockData = List(10) { Book("$it", "$it") }
         BookGridScreen(mockData)
     }
-}
+}*/

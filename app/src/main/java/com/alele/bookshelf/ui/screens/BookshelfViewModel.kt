@@ -10,13 +10,12 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.alele.bookshelf.BookshelfApplication
 import com.alele.bookshelf.data.BookRepository
-import com.alele.bookshelf.model.AllData
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 /** mutable state for the Home screen */
 sealed interface BookshelfUiState {
-    data class Success(val books: AllData): BookshelfUiState
+    data class Success(val books: MutableList<String>): BookshelfUiState
     object Error: BookshelfUiState
     object Loading: BookshelfUiState
 }
@@ -38,7 +37,16 @@ class BookshelfViewModel (private val bookRepository: BookRepository): ViewModel
         viewModelScope.launch{
             bookshelfUiState = BookshelfUiState.Loading
             bookshelfUiState = try{
-                BookshelfUiState.Success(bookRepository.getAllBookData())
+                // generate list of books details
+                val listBooks = bookRepository.getAllBookData().items
+                // create mutable list to store the thumbnail urls
+                val listBookImages = mutableListOf<String>()
+                // add thumbnail urls to the mutable list
+                for (element in listBooks) {
+                    val url = element.volumeInfo.imageLinks.thumbnail.replace("http", "https")
+                    listBookImages.add(url)
+                }
+                BookshelfUiState.Success(listBookImages)
             } catch (e: IOException) {
                 BookshelfUiState.Error
             }

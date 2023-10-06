@@ -14,7 +14,7 @@ data class VolumeInfo(
     val readingModes: ReadingModes,
     val pageCount: Int,
     val printType: String,
-    val categories: List<String>,
+    val categories: List<String>? = null,
     val maturityRating: String,
     val allowAnonLogging: Boolean,
     val contentVersion: String,
