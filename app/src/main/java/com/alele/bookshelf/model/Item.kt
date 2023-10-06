@@ -12,5 +12,5 @@ data class Item(
     val volumeInfo: VolumeInfo,
     val saleInfo: SaleInfo,
     val accessInfo: AccessInfo,
-    val searchInfo: SearchInfo
+    val searchInfo: SearchInfo? = null
 )

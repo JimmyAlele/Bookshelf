@@ -7,3 +7,13 @@ photos from the internet. The application follows Modern Android Design guidelin
 ## About Google Books API
 The Google Books API provides a method that returns a list of books based on a particular search 
 term, as described in [Using the API](https://developers.google.com/books/docs/v1/using?authuser=1#PerformingSearch).
+
+## Concepts applied
+- Composable functions
+- Modern architecture including; viewModel
+- Coroutines for long-running tasks
+- Clean architecture by separating the network calls into a repository
+- Use the Coil library used to load and display photos from the internet in the app
+- Use of Retrofit to make REST requests to the web server
+
+## Pictures of the final app
